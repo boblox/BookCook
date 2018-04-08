@@ -1,0 +1,48 @@
+@media (min-width: 767px) {
+    .title {
+        margin: 50px 0;
+    }
+}
+
+.global-actions {
+    margin: 15px 0;
+}
+
+.cook-book {
+    .table-row {
+        min-height: 45px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .item {
+            padding: 0 15px;
+        }
+    }
+
+    .header {
+        background-color: burlywood;
+        font-weight: bold;
+    }
+
+    .recipe {
+        display: flex;
+        background-color: blanchedalmond;
+    }
+
+    .name {
+        width: 100px;
+    }
+
+    .description {
+        width: 200px;
+    }
+
+    .creation-date {
+        width: 200px;
+    }
+
+    .actions {
+        width: auto;
+    }
+}

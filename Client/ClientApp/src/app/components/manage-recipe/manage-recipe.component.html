@@ -1,0 +1,30 @@
+<div class="dialog-inner">
+    <a class="close" (click)="hide()">
+        <span class="lnr lnr-cross"></span>
+    </a>
+    <div class="header">
+        <h2>{{title}}</h2>
+    </div>
+    <div class="content" *ngIf="recipe">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [(ngModel)]="recipe.name" type="text" name="name"
+                       class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Desciption</label>
+                <textarea [(ngModel)]="recipe.description" name="description"
+                          class="form-control" id="description"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="buttons">
+        <button type="button" class="btn btn-default button" *ngIf="cancelText" (click)="onCancel()">
+            {{cancelText}}
+        </button>
+        <button type="button" class="btn btn-success button" *ngIf="confirmText" (click)="onConfirm()">
+            {{confirmText}}
+        </button>
+    </div>
+</div>
