@@ -16,13 +16,16 @@ export class HomeComponent implements OnInit {
 
     }
 
+    private sortRecipes(recipes: Recipe[]) {
+        recipes.sort((a, b) =>
+            b.dateCreated.getTime() - a.dateCreated.getTime()
+        );
+    }
+
     ngOnInit(): void {
         this.recipesService.getRecipes()
             .subscribe(data => {
-                this.recipes = data
-                    .sort((a, b) =>
-                        b.dateCreated.getTime() - a.dateCreated.getTime()
-                    );
+                this.sortRecipes(this.recipes = data);
             });
     }
 
@@ -36,6 +39,7 @@ export class HomeComponent implements OnInit {
             },
             (createdRecipe: Recipe) => {
                 this.recipes.push(createdRecipe);
+                this.sortRecipes(this.recipes);
             },
             newRecipe,
             ManageMode.Edit);
