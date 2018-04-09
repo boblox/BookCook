@@ -14,7 +14,9 @@ namespace API.Abstractions
 
         IList<RecipeRevision> GetRecipeRevisions(int recipeId);
 
-        int SaveRecipe(Recipe recipe);
+        void CreateRecipe(Recipe recipe);
+
+        void UpdateRecipe(Recipe recipe);
 
         bool DeleteRecipe(int recipeId);
     }

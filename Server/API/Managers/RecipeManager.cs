@@ -44,24 +44,9 @@ namespace API.Managers
                 };
         }
 
-        public bool DeleteRecipe(int recipeId)
-        {
-            var recipe = GetDbRecipe(recipeId);
-            if (recipe != null)
-            {
-                recipe.Deleted = true;
-                _context.Update(recipe);
-                _context.SaveChanges();
-                return true;
-            }
-            return false;
-        }
-
         public IList<RecipeRevision> GetRecipeRevisions(int recipeId)
         {
             var dbRecipe = GetDbRecipe(recipeId);
-            _logger.LogInformation((dbRecipe == null).ToString());
-            _logger.LogWarning(recipeId.ToString());
             if (dbRecipe != null)
             {
                 _context.Entry(dbRecipe).Collection(i => i.Revisions).Load();
@@ -77,7 +62,6 @@ namespace API.Managers
                     })
                     .ToList();
             }
-            //TODO: maybe throw exception?
             return null;
         }
 
@@ -111,50 +95,70 @@ namespace API.Managers
                     Data = GetRecipeData(GetRecipeCurrentRevision(dbRecipe.Revisions))
                 };
             }
-            //TODO: maybe throw exception?
             return null;
         }
 
-        public int SaveRecipe(Recipe recipe)
+        public void CreateRecipe(Recipe recipe)
         {
-            var recipeId = recipe.Id;
+            if (recipe == null || recipe.Data == null) throw new ArgumentNullException();
+
             var dbRecipe = new DataModels.Recipe()
             {
-                //Id = recipe.Id,
                 DateCreated = DateTime.Now,
+                Revisions = new List<DataModels.RecipeRevision>
+                {
+                    new DataModels.RecipeRevision()
+                    {
+                        Name = recipe.Data.Name,
+                        Description = recipe.Data.Description,
+                        StartDate = DateTime.Now,
+                        EndDate = null,
+                        Version = 1,
+                    }
+                }
             };
+
+            this._context.Recipes.Add(dbRecipe);
+            this._context.SaveChanges();
+            recipe.Id = dbRecipe.Id;
+        }
+
+        public void UpdateRecipe(Recipe recipe)
+        {
+            if (recipe == null || recipe.Data == null || recipe.Id <= 0) throw new ArgumentNullException();
+
+            var revisions = this._context.RecipeRevisions
+                .Where(i => i.RecipeId == recipe.Id).ToList();
+            if (revisions == null) throw new ArgumentNullException();
+
+            var latestRevision = GetRecipeCurrentRevision(revisions);
+            latestRevision.EndDate = DateTime.Now;
             var dbRecipeRevision = new DataModels.RecipeRevision()
             {
                 Name = recipe.Data.Name,
                 Description = recipe.Data.Description,
                 StartDate = DateTime.Now,
                 EndDate = null,
-                Version = 1,
+                Version = latestRevision.Version + 1,
+                RecipeId = latestRevision.RecipeId,
             };
 
-            if (recipeId == 0)
-            {
-                this._context.Recipes.Add(dbRecipe);
-                this._context.SaveChanges();
-                dbRecipeRevision.Recipe = dbRecipe;
-                recipeId = dbRecipe.Id;
-                this._context.RecipeRevisions.Add(dbRecipeRevision);
-                this._context.SaveChanges();
-            }
-            else
-            {
-                var revisions = this._context.RecipeRevisions
-                    .Where(i => i.RecipeId == recipeId).ToList();
-                var latestRevision = GetRecipeCurrentRevision(revisions);
-                latestRevision.EndDate = DateTime.Now;
-                dbRecipeRevision.Version = latestRevision.Version + 1;
-                dbRecipeRevision.RecipeId = recipeId;
-                this._context.RecipeRevisions.Update(latestRevision); //Update latest revision - from now - old
-                this._context.RecipeRevisions.Add(dbRecipeRevision); //Add new revision
-                this._context.SaveChanges();
-            }
+            this._context.RecipeRevisions.Update(latestRevision); //Update latest revision - from now - old
+            this._context.RecipeRevisions.Add(dbRecipeRevision); //Add new revision
+            this._context.SaveChanges();
+        }
 
-            return recipeId;
+        public bool DeleteRecipe(int recipeId)
+        {
+            var recipe = GetDbRecipe(recipeId);
+            if (recipe != null)
+            {
+                recipe.Deleted = true;
+                _context.Update(recipe);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

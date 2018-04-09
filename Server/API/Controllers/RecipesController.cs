@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using API.Abstractions;
+﻿using API.Abstractions;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace API.Controllers
 {
@@ -21,28 +19,50 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Recipe> GetRecipes()
+        public IActionResult GetRecipes()
         {
-            return _recipeManager.GetRecipes();
+            return Ok(_recipeManager.GetRecipes());
         }
 
         [HttpGet("{id}/history")]
-        public IEnumerable<RecipeRevision> GetRecipeRevisions(int id)
+        public IActionResult GetRecipeRevisions(int id)
         {
-            return _recipeManager.GetRecipeRevisions(id);
+            return Ok(_recipeManager.GetRecipeRevisions(id));
         }
 
         [HttpGet("{id}")]
-        public Recipe GetRecipe(int id)
+        public IActionResult GetRecipe(int id)
         {
-            return _recipeManager.GetRecipe(id);
+            var recipe = _recipeManager.GetRecipe(id);
+            if (recipe != null)
+            {
+                return Ok(recipe);
+            }
+            return NotFound();
         }
-        
+
         [HttpPost]
-        public Recipe SaveRecipe([FromBody]Recipe recipe)
+        public IActionResult SaveRecipe([FromBody]Recipe recipe)
         {
-            var recipeId = _recipeManager.SaveRecipe(recipe);
-            return _recipeManager.GetRecipe(recipeId);
+            if (recipe == null || recipe.Data == null || recipe.Id < 0)
+            {
+                return BadRequest();
+            }
+
+            if (recipe.Id == 0)
+            {
+                _recipeManager.CreateRecipe(recipe);
+            }
+            else
+            {
+                var dbRecipe = _recipeManager.GetRecipe(recipe.Id);
+                if (dbRecipe == null)
+                {
+                    return NotFound();
+                }
+                _recipeManager.UpdateRecipe(recipe);
+            }
+            return Ok(_recipeManager.GetRecipe(recipe.Id));
         }
 
         // PUT api/values/5
@@ -52,9 +72,11 @@ namespace API.Controllers
         //}
 
         [HttpDelete("{id}")]
-        public bool DeleteRecipe(int id)
+        public IActionResult DeleteRecipe(int id)
         {
-            return _recipeManager.DeleteRecipe(id);
+            var result = _recipeManager.DeleteRecipe(id);
+            if (result) return Ok(result);
+            return NotFound();
         }
     }
 }
