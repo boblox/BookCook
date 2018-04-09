@@ -19,7 +19,7 @@ export class ManageRecipeComponent implements OnInit {
     @Input() cancelText: string;
     @Input() confirmText: string;
     //@Input() data: ConfirmDialogData;
-    private recipe: Recipe;
+    recipe: Recipe;
     private mode: ManageMode;
     private cancel: () => void;
     private confirm: (recipe: Recipe) => void;

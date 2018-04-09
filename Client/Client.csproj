@@ -27,41 +27,6 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="ClientApp\src\app\models\index.ts" />
-    <None Remove="ClientApp\src\app\models\recipe-data.model.ts" />
-    <None Remove="ClientApp\src\app\models\recipe-revision.model.ts" />
-    <None Remove="ClientApp\src\app\models\recipe.model.ts" />
-    <None Remove="ClientApp\src\app\services\data-mapper.interface.ts" />
-    <None Remove="ClientApp\src\app\services\data-mapper.service.interface.ts" />
-    <None Remove="ClientApp\src\app\services\data-mapper.service.ts" />
-    <None Remove="ClientApp\src\app\services\index.ts" />
-    <None Remove="ClientApp\src\app\services\mapper\recipe-data-mapper.ts" />
-    <None Remove="ClientApp\src\app\services\mapper\recipe-mapper.ts" />
-    <None Remove="ClientApp\src\app\services\mapper\recipe-revision-mapper.ts" />
-    <None Remove="ClientApp\src\app\services\recipes.service.ts" />
-    <None Remove="ClientApp\src\app\services\settings.service.interface.ts" />
-    <None Remove="ClientApp\src\app\services\settings.service.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\models\index.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\recipe-data.model.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\mapper\recipe-data-mapper.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\mapper\recipe-revision-mapper.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\mapper\recipe-mapper.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\mapper\data-mapper.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\mapper\data-mapper.service.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\index.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\mapper\data-mapper.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\recipes.service.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\recipe-revision.model.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\recipe.model.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\recipes.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\settings.service.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\settings.service.ts" />
-  </ItemGroup>
-
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
