@@ -6,10 +6,11 @@ namespace API.Abstractions
 {
     public interface IRecipesController
     {
-        IEnumerable<RecipeRevision> GetRecipeRevisions(int id);
         IEnumerable<Recipe> GetRecipes();
-        void Delete(int id);
-        void Post([FromBody] string value);
-        void Put(int id, [FromBody] string value);
+        IEnumerable<RecipeRevision> GetRecipeRevisions(int id);
+        Recipe GetRecipe(int id);
+        bool DeleteRecipe(int id);
+        Recipe SaveRecipe([FromBody] Recipe value);
+        //void Put(int id, [FromBody] string value);
     }
 }

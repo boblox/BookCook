@@ -1,10 +1,14 @@
-.body-content {
-    
+.page-nav-header {
+    .title {
+        margin: 40px 0 20px;
+        text-align: center;
+    }
 }
 
-@media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    .body-content {
-        padding-top: 50px;
-    }
+.page-content {
+
+}
+
+.page-footer {
+
 }

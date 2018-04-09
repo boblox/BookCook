@@ -1,0 +1,168 @@
+/************Global styles used for all components***********/
+@import "variables";
+
+/*html {
+    height: 100%;
+}
+
+body {
+    font-family: $default-font;
+    font-weight: 400;
+    font-size: $default-font-size;
+    color: $default-font-color;
+    line-height: $default-line-height-computed / $default-font-size;
+    overflow-y: scroll;
+    height: 100%;
+
+    > ui-view{
+        min-height: 100%;
+    }
+}*/
+
+/*h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+}*/
+
+/*h1 {
+    font-size: 24px;
+    font-weight: 400;
+    color: black;
+}*/
+
+/*input, button, textarea {
+    font-family: $default-font;
+}*/
+
+/*.link-default {
+    @extend .upcase-m;
+    color: $link-color;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: none;
+        color: $link-color-hover;
+    }
+
+    &.active, &:active {
+        text-decoration: none;
+        color: $link-color-active;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: $default-font-color;
+        opacity: 0.5;
+    }
+}
+
+a.link-non-decorated {
+    //color: inherit;
+
+    &:hover, &:active {
+        //color: inherit;
+        text-decoration: none;
+        //opacity: 1;
+    }
+}*/
+
+/*.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}*/
+
+form {
+    .ng-valid[required], .ng-valid.required {
+        border-left: 5px solid #42A948; /* green */
+    }
+
+    .ng-invalid:not(form) {
+        border-left: 5px solid #a94442; /* red */
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/*.clear {
+    clear: both;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.left-aligned {
+    margin-right: auto;
+}
+
+.right-aligned {
+    margin-left: auto;
+}*/
+
+/*.row-action {
+    display: inline-block;
+    flex-shrink: 0;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    line-height: 40px;
+    font-size: 18px;
+    text-align: center;
+    transition: background $transition1;
+
+    &:hover {
+        background: $gray-color4;
+        text-decoration: none;
+    }
+
+    &.icon-basic-magnifier-plus {
+        color: $blue-color3;
+    }
+    &.icon-basic-share {
+        color: $default-font-color;
+    }
+    &.icon-basic-elaboration-mail-next {
+        color: $default-font-color;
+    }
+    &.icon-basic-trashcan {
+        font-size: 16px;
+        color: $orange-color1;
+    }
+    &.lnr-pencil {
+        font-size: 16px;
+        line-height: 35px;
+        color: $blue-color3;
+    }
+    &.lnr-enter-down {
+        font-size: 18px;
+        line-height: 32px;
+        color: $orange-color1;
+    }
+    &.lnr-trash {
+        line-height: 35px;
+        color: $orange-color1;
+    }
+    &.lnr-checkmark-circle {
+        line-height: 35px;
+        color: $green-color1;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        cursor: default;
+        color: $default-font-color;
+        opacity: 0.5;
+    }
+}*/

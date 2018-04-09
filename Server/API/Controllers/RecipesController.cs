@@ -4,6 +4,7 @@ using System.Linq;
 using API.Abstractions;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
@@ -11,65 +12,49 @@ namespace API.Controllers
     public class RecipesController : Controller, IRecipesController
     {
         private readonly IRecipeManager _recipeManager;
+        private readonly ILogger<IRecipesController> _logger;
 
-        public RecipesController(IRecipeManager recipeManager)
+        public RecipesController(IRecipeManager recipeManager, ILogger<IRecipesController> logger)
         {
             _recipeManager = recipeManager;
+            _logger = logger;
         }
 
-        // GET api/values
         [HttpGet]
         public IEnumerable<Recipe> GetRecipes()
         {
             return _recipeManager.GetRecipes();
-
-            //return new List<Recipe>() {
-            //    new Recipe() {
-            //        Description = "First Recipe"
-            //    },
-            //    new Recipe() {
-            //        Description = "Second Recipe"
-            //    }
-            //};
         }
-
-        // GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
 
         [HttpGet("{id}/history")]
         public IEnumerable<RecipeRevision> GetRecipeRevisions(int id)
         {
-            return null;
-            //return new List<Recipe>() {
-            //    new Recipe() {
-            //        Description = "First History Recipe"
-            //    },
-            //    new Recipe() {
-            //        Description = "Second History Recipe"
-            //    }
-            //};
+            return _recipeManager.GetRecipeRevisions(id);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpGet("{id}")]
+        public Recipe GetRecipe(int id)
         {
+            return _recipeManager.GetRecipe(id);
+        }
+        
+        [HttpPost]
+        public Recipe SaveRecipe([FromBody]Recipe recipe)
+        {
+            var recipeId = _recipeManager.SaveRecipe(recipe);
+            return _recipeManager.GetRecipe(recipeId);
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public bool DeleteRecipe(int id)
         {
+            return _recipeManager.DeleteRecipe(id);
         }
     }
 }

@@ -4,7 +4,7 @@
     margin: 15px 0;
 }
 
-.cook-book {
+.recipe-revisions {
     .table-row {
         min-height: 45px;
         display: flex;
@@ -40,12 +40,16 @@
         flex: 2 1 200px;
     }
 
-    .creation-date {
+    .edit-date {
         flex: 1 1 200px;
     }
 
+    .version {
+        flex: 1 1 100px;
+    }
+
     .actions {
-        flex: 1 1 150px;
+        flex: 1 1 100px;
         display: flex;
 
         .action {
@@ -54,11 +58,7 @@
             margin: 0 12px 0 0;
             font-size: 18px;
 
-            &.edit {
-                color: $orange-color1;
-            }
-
-            &.delete {
+            &.view {
                 color: $green-color2;
             }
         }

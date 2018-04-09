@@ -15,6 +15,6 @@ namespace API.Models
 
         public bool Deleted { get; set; }
 
-        public IList<RecipeRevision> Revisions { get; set; }
+        //public IList<RecipeRevision> Revisions { get; set; }
     }
 }

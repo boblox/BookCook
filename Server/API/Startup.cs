@@ -48,7 +48,7 @@ namespace API
 
             //TODO: AllowAnyOrigin - not a good implementation, but ok for test app. 
             //Here should be specific url
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod());
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             if (env.IsDevelopment())
             {

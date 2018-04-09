@@ -1,0 +1,48 @@
+<app-manage-recipe [cancelText]="'Cancel'" [confirmText]="'Save'"></app-manage-recipe>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <h3>Looking at the history of <strong>{{recipe?.data.name}}</strong></h3>
+        <div class="global-actions">
+            <button [routerLink]="'/'" type="button" class="btn btn-info">Back to recipes</button>
+        </div>
+        <div class="recipe-revisions">
+            <div class="header table-row">
+                <div class="item name">
+                    Name
+                </div>
+                <div class="item description">
+                    Description
+                </div>
+                <div class="item edit-date">
+                    Edit Date
+                </div>
+                <div class="item version">
+                    Version
+                </div>
+                <div class="item actions">
+                    Actions
+                </div>
+            </div>
+            <div *ngFor="let revision of recipeRevisions" class="recipe table-row">
+                <div class="item name">
+                    {{revision.data?.name}}
+                </div>
+                <div class="item description">
+                    {{revision.data?.description}}
+                </div>
+                <div class="item edit-date">
+                    {{revision.startDate | date: 'medium'}}
+                </div>
+                <div class="item version">
+                    {{revision.version}}
+                </div>
+                <div class="item actions">
+                    <span class="lnr lnr-magnifier action view"
+                        (click)="viewRecipe(revision)" title="View">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

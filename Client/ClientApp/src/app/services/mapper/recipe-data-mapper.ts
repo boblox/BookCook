@@ -1,5 +1,5 @@
-import { Recipe, RecipeData } from "../../models";
-import { IDataMapper } from "./data-mapper.interface";
+import {Recipe, RecipeData} from '../../models';
+import {IDataMapper} from './data-mapper.interface';
 
 export class RecipeDataMapper implements IDataMapper<RecipeData> {
     constructor() {
@@ -14,6 +14,9 @@ export class RecipeDataMapper implements IDataMapper<RecipeData> {
     }
 
     getApiModel(clientModel: RecipeData): Object {
-        throw new Error("Method not implemented.");
+        return {
+            name: clientModel.name,
+            description: clientModel.description
+        };
     }
 }

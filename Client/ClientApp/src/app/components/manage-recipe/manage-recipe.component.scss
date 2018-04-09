@@ -28,7 +28,7 @@
             top: 20px;
             right: 20px;
             transition: all linear;
-            color: darkgray;
+            color: brown;
 
             &:hover, &:active {
                 text-decoration: none;
@@ -48,6 +48,15 @@
 
         .content {
             margin: 35px 20px;
+
+            .form-group {
+                &.description {
+                    textarea {
+                        resize: vertical;
+                        min-height: 150px;
+                    }
+                }
+            }
         }
 
         .buttons {

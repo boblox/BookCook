@@ -8,5 +8,5 @@ export interface IRecipesService {
     
     saveRecipe(recipe: Recipe): Observable<Recipe>;
 
-    deleteRecipe(recipeId: number): Observable<boolean>;
+    deleteRecipe(recipeId: number): Observable<boolean>; 
 }

@@ -1,6 +1,4 @@
-//import { IApiModel } from "./api-model.interface";
-
-export class RecipeData /*implements IApiModel*/ {
+export class RecipeData {
     name: string;
     description: string;
 

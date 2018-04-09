@@ -10,10 +10,12 @@ namespace API.Abstractions
     {
         IList<Recipe> GetRecipes();
 
+        Recipe GetRecipe(int id);
+
         IList<RecipeRevision> GetRecipeRevisions(int recipeId);
 
-        void SaveRecipe(Recipe recipe);
+        int SaveRecipe(Recipe recipe);
 
-        void DeleteRecipe(int recipeId);
+        bool DeleteRecipe(int recipeId);
     }
 }
