@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Abstractions;
+﻿using API.Abstractions;
 using API.Managers;
 using DataLayer;
+using DataLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +26,7 @@ namespace API
         {
             //TODO: bad method: direct use of CookBookContext
             services.AddDbContext<CookBookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<ICookBookContext>(provider => provider.GetService<CookBookContext>());
             services.AddScoped<IRecipeManager, RecipeManager>();
 
             services.AddCors();

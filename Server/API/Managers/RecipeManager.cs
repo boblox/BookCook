@@ -1,39 +1,38 @@
 ﻿using API.Abstractions;
 using API.Models;
-using DataLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using DataModels = DataLayer.Models;
+using IDataLayer = DataLayer.Interfaces;
 using Microsoft.Extensions.Logging;
+
 
 namespace API.Managers
 {
     public class RecipeManager : IRecipeManager
     {
-        private readonly CookBookContext _context;
+        private readonly IDataLayer.ICookBookContext _context;
         private readonly ILogger<IRecipesController> _logger;
 
-        public RecipeManager(CookBookContext context, ILogger<IRecipesController> logger)
+        public RecipeManager(IDataLayer.ICookBookContext context, ILogger<IRecipesController> logger)
         {
             _context = context;
             _logger = logger;
         }
 
-        private DataModels.Recipe GetDbRecipe(int id)
+        private IDataLayer.Recipe GetDbRecipe(int id)
         {
             return _context.Recipes
                 .Where(i => i.Id == id && !i.Deleted)
                 .FirstOrDefault();
         }
 
-        private DataModels.RecipeRevision GetRecipeCurrentRevision(ICollection<DataModels.RecipeRevision> revisions)
+        private IDataLayer.RecipeRevision GetRecipeCurrentRevision(ICollection<IDataLayer.RecipeRevision> revisions)
         {
             return revisions.FirstOrDefault(i => i.EndDate == null);
         }
 
-        private RecipeData GetRecipeData(DataModels.RecipeRevision recipeRevision)
+        private RecipeData GetRecipeData(IDataLayer.RecipeRevision recipeRevision)
         {
             return recipeRevision == null ?
                 null :
@@ -102,12 +101,13 @@ namespace API.Managers
         {
             if (recipe == null || recipe.Data == null) throw new ArgumentNullException();
 
-            var dbRecipe = new DataModels.Recipe()
+            //TODO: bad behaviour: code depends on realization!
+            var dbRecipe = new IDataLayer.Recipe()
             {
                 DateCreated = DateTime.Now,
-                Revisions = new List<DataModels.RecipeRevision>
+                Revisions = new List<IDataLayer.RecipeRevision>
                 {
-                    new DataModels.RecipeRevision()
+                    new IDataLayer.RecipeRevision()
                     {
                         Name = recipe.Data.Name,
                         Description = recipe.Data.Description,
@@ -133,7 +133,7 @@ namespace API.Managers
 
             var latestRevision = GetRecipeCurrentRevision(revisions);
             latestRevision.EndDate = DateTime.Now;
-            var dbRecipeRevision = new DataModels.RecipeRevision()
+            var dbRecipeRevision = new IDataLayer.RecipeRevision()
             {
                 Name = recipe.Data.Name,
                 Description = recipe.Data.Description,
@@ -154,7 +154,7 @@ namespace API.Managers
             if (recipe != null)
             {
                 recipe.Deleted = true;
-                _context.Update(recipe);
+                _context.Recipes.Update(recipe);
                 _context.SaveChanges();
                 return true;
             }

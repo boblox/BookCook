@@ -1,9 +1,9 @@
-﻿using DataLayer.Models;
+﻿using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer
 {
-    public class CookBookContext : DbContext
+    public class CookBookContext : DbContext, ICookBookContext
     {
         public CookBookContext(DbContextOptions<CookBookContext> options) : base(options)
         {
