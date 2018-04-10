@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
     readonly maxFieldLength = 60;
     public recipes: Recipe[];
     public dialogText: any = {};
+    private error: any;
     @ViewChild(ManageRecipeComponent) manageRecipeDialog: ManageRecipeComponent;
     @ViewChild(ConfirmDialogComponent) confirmDeleteDialog: ConfirmDialogComponent;
 
@@ -35,8 +36,13 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.recipesService.getRecipes()
             .subscribe(data => {
-                HomeComponent.sortRecipes(this.recipes = data);
-            });
+                    HomeComponent.sortRecipes(this.recipes = data);
+                    this.error = null;
+                },
+                (error) => {
+                    console.log(error);
+                    this.error = error;
+                });
     }
 
     addRecipe() {

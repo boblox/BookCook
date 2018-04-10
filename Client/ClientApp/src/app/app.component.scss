@@ -2,18 +2,21 @@
 
 .page-nav-header {
     .title {
-        margin: 40px 0 30px;
+        padding: 20px 0 35px;
         text-align: center;
+        background-color: $violet-color2;
+        border-radius: 0 0 15px 15px;
+
         h1 {
-            color: $violet-color1;
+            color: black;
         }
     }
 }
 
 .page-content {
-
+    margin-top: 20px;
 }
 
 .page-footer {
-
+    min-height: 50px;
 }

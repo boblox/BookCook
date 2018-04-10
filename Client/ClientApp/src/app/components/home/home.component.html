@@ -6,45 +6,49 @@
 
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
-        <h4 *ngIf="recipes?.length===0">Start your journey by adding your first recipe!</h4>
-        <div class="global-actions">
-            <button (click)="addRecipe()" type="button" class="btn btn-success" href="#">Add recipe</button>
-        </div>
-        <div class="cook-book" *ngIf="recipes?.length>0">
-            <div class="header table-row">
-                <div class="item name">
-                    Name
-                </div>
-                <div class="item description">
-                    Description
-                </div>
-                <div class="item creation-date">
-                    Date of creation
-                </div>
-                <div class="item actions">
-                    Actions
-                </div>
+        <h4 *ngIf="error">Something went wrong. We will get back to you ASAP</h4>
+
+        <div class="content" *ngIf="!error">
+            <h4 *ngIf="recipes?.length===0">Start your journey by adding your first recipe!</h4>
+            <div class="global-actions">
+                <button (click)="addRecipe()" type="button" class="btn btn-success" href="#">Add recipe</button>
             </div>
-            <div *ngFor="let recipe of recipes" class="recipe table-row">
-                <div class="item name">
-                    {{getShortName(recipe.data?.name)}}
+            <div class="cook-book" *ngIf="recipes?.length>0">
+                <div class="header table-row">
+                    <div class="item name">
+                        Name
+                    </div>
+                    <div class="item description">
+                        Description
+                    </div>
+                    <div class="item creation-date">
+                        Date of creation
+                    </div>
+                    <div class="item actions">
+                        Actions
+                    </div>
                 </div>
-                <div class="item description">
-                    {{getShortName(recipe.data?.description)}}
-                </div>
-                <div class="item creation-date">
-                    {{recipe.dateCreated | date: 'medium'}}
-                </div>
-                <div class="item actions">
+                <div *ngFor="let recipe of recipes" class="recipe table-row">
+                    <div class="item name">
+                        {{getShortName(recipe.data?.name)}}
+                    </div>
+                    <div class="item description">
+                        {{getShortName(recipe.data?.description)}}
+                    </div>
+                    <div class="item creation-date">
+                        {{recipe.dateCreated | date: 'medium'}}
+                    </div>
+                    <div class="item actions">
                     <span class="lnr lnr-pencil action edit"
                         (click)="editRecipe(recipe)" title="Edit">
                     </span>
-                    <span class="lnr lnr-trash action delete"
-                        (click)="deleteRecipe(recipe)" title="Delete">
+                        <span class="lnr lnr-trash action delete"
+                            (click)="deleteRecipe(recipe)" title="Delete">
                     </span>
-                    <span class="lnr lnr-history action history"
-                        [routerLink]="['/recipe', recipe.id, 'history']" title="View history">
+                        <span class="lnr lnr-history action history"
+                            [routerLink]="['/recipe', recipe.id, 'history']" title="View history">
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
