@@ -70,7 +70,7 @@ namespace API.Managers
                     })
                     .ToList();
             }
-            return null;
+            return new List<RecipeRevision>();
         }
 
         public IList<Recipe> GetRecipes()

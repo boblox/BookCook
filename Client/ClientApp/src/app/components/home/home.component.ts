@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     readonly maxFieldLength = 60;
     public recipes: Recipe[];
     public dialogText: any = {};
-    private error: any;
+    public error: any;
     @ViewChild(ManageRecipeComponent) manageRecipeDialog: ManageRecipeComponent;
     @ViewChild(ConfirmDialogComponent) confirmDeleteDialog: ConfirmDialogComponent;
 
