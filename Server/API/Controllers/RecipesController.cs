@@ -44,7 +44,8 @@ namespace API.Controllers
         [HttpPost]
         public IActionResult SaveRecipe([FromBody]Recipe recipe)
         {
-            if (recipe == null || recipe.Data == null || recipe.Id < 0)
+            if (recipe == null || recipe.Data == null ||
+                recipe.Id < 0 || string.IsNullOrEmpty(recipe.Data.Name))
             {
                 return BadRequest();
             }

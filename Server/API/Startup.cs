@@ -24,7 +24,6 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //TODO: bad method: direct use of CookBookContext
             services.AddDbContext<CookBookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICookBookContext>(provider => provider.GetService<CookBookContext>());
             services.AddScoped<IRecipeManager, RecipeManager>();

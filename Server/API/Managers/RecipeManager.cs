@@ -11,14 +11,20 @@ namespace API.Managers
 {
     public class RecipeManager : IRecipeManager
     {
+        #region Fields
         private readonly IDataLayer.ICookBookContext _context;
-        private readonly ILogger<IRecipesController> _logger;
+        private readonly ILogger<IRecipeManager> _logger;
+        #endregion
 
-        public RecipeManager(IDataLayer.ICookBookContext context, ILogger<IRecipesController> logger)
+        #region .Ctor
+        public RecipeManager(IDataLayer.ICookBookContext context, ILogger<IRecipeManager> logger)
         {
-            _context = context;
-            _logger = logger;
+            _context = context ?? throw new ArgumentNullException("context", "Please provide valid ICookBookContext");
+            _logger = logger ?? throw new ArgumentNullException("logger", "Please provide valid ILogger<IRecipeManager>");
         }
+        #endregion
+
+        #region Private methods
 
         private IDataLayer.Recipe GetDbRecipe(int id)
         {
@@ -43,6 +49,9 @@ namespace API.Managers
                 };
         }
 
+        #endregion
+
+        #region Public methods
         public IList<RecipeRevision> GetRecipeRevisions(int recipeId)
         {
             var dbRecipe = GetDbRecipe(recipeId);
@@ -99,7 +108,11 @@ namespace API.Managers
 
         public void CreateRecipe(Recipe recipe)
         {
-            if (recipe == null || recipe.Data == null) throw new ArgumentNullException();
+            if (recipe == null || recipe.Data == null || string.IsNullOrEmpty(recipe.Data.Name))
+            {
+                this._logger.LogWarning("Can't create recipe. Provided data is invalid - null or empty");
+                throw new ArgumentNullException();
+            }
 
             //TODO: bad behaviour: code depends on realization!
             var dbRecipe = new IDataLayer.Recipe()
@@ -121,15 +134,24 @@ namespace API.Managers
             this._context.Recipes.Add(dbRecipe);
             this._context.SaveChanges();
             recipe.Id = dbRecipe.Id;
+            this._logger.LogInformation("Recipe created. Id = {0}", recipe.Id);
         }
 
         public void UpdateRecipe(Recipe recipe)
         {
-            if (recipe == null || recipe.Data == null || recipe.Id <= 0) throw new ArgumentNullException();
+            if (recipe == null || recipe.Data == null || recipe.Id <= 0)
+            {
+                this._logger.LogWarning("Can't update recipe. Provided data is invalid - null or empty");
+                throw new ArgumentNullException();
+            }
 
             var revisions = this._context.RecipeRevisions
                 .Where(i => i.RecipeId == recipe.Id).ToList();
-            if (revisions == null) throw new ArgumentNullException();
+            if (revisions == null)
+            {
+                this._logger.LogWarning($"No existing recipe revisions for recipe. Id = {recipe.Id}");
+                throw new NullReferenceException($"Can't update recipe. No existing recipe revisions");
+            };
 
             var latestRevision = GetRecipeCurrentRevision(revisions);
             latestRevision.EndDate = DateTime.Now;
@@ -146,6 +168,7 @@ namespace API.Managers
             this._context.RecipeRevisions.Update(latestRevision); //Update latest revision - from now - old
             this._context.RecipeRevisions.Add(dbRecipeRevision); //Add new revision
             this._context.SaveChanges();
+            this._logger.LogInformation("Recipe updated. Id = {0}", recipe.Id);
         }
 
         public bool DeleteRecipe(int recipeId)
@@ -156,9 +179,13 @@ namespace API.Managers
                 recipe.Deleted = true;
                 _context.Recipes.Update(recipe);
                 _context.SaveChanges();
+                this._logger.LogInformation("Recipe deleted. Id = {0}", recipeId);
                 return true;
             }
+            this._logger.LogInformation("Can't delete recipe with Id = {0}", recipeId);
             return false;
         }
+
+        #endregion
     }
 }
