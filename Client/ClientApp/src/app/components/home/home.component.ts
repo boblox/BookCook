@@ -12,7 +12,7 @@ import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component
 export class HomeComponent implements OnInit {
     readonly maxFieldLength = 60;
     public recipes: Recipe[];
-    public dialogText = {};
+    public dialogText: any = {};
     @ViewChild(ManageRecipeComponent) manageRecipeDialog: ManageRecipeComponent;
     @ViewChild(ConfirmDialogComponent) confirmDeleteDialog: ConfirmDialogComponent;
 
