@@ -31,11 +31,13 @@ export class ConfirmDialogComponent implements OnInit {
 
     @HostListener('document:keydown', ['$event'])
     onKeyUp(e: any) {
-        if (e.keyCode === 27) {
-            this.onCancel();
-        } else if ([13].indexOf(e.keyCode) >= 0) {
-            e.preventDefault();
-            this.onConfirm();
+        if (!this.hidden) {
+            if (e.keyCode === 27) {
+                this.onCancel();
+            } else if ([13].indexOf(e.keyCode) >= 0) {
+                e.preventDefault();
+                this.onConfirm();
+            }
         }
     }
 

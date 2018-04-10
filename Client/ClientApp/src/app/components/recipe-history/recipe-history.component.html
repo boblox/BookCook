@@ -21,7 +21,7 @@
                     Version
                 </div>
                 <div class="item actions">
-                    Actions
+                    <!--Actions-->
                 </div>
             </div>
             <div *ngFor="let revision of recipeRevisions" class="recipe table-row">
@@ -32,7 +32,7 @@
                     {{getShortName(revision.data?.description)}}
                 </div>
                 <div class="item edit-date">
-                    {{revision.startDate | date: 'medium'}}
+                    {{revision.startDate | date: 'MMM d, y, HH:mm:ss z'}}
                 </div>
                 <div class="item version">
                     {{revision.version}}

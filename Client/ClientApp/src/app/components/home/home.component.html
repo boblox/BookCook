@@ -25,7 +25,7 @@
                         Date of creation
                     </div>
                     <div class="item actions">
-                        Actions
+                        <!--Actions-->
                     </div>
                 </div>
                 <div *ngFor="let recipe of recipes" class="recipe table-row">
@@ -36,7 +36,7 @@
                         {{getShortName(recipe.data?.description)}}
                     </div>
                     <div class="item creation-date">
-                        {{recipe.dateCreated | date: 'medium'}}
+                        {{recipe.dateCreated | date: 'MMM d, y, HH:mm:ss z'}}
                     </div>
                     <div class="item actions">
                     <span class="lnr lnr-pencil action edit"

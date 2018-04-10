@@ -46,10 +46,11 @@
 
     .version {
         flex: 1 1 100px;
+        text-align: center;
     }
 
     .actions {
-        flex: 1 1 100px;
+        flex: 1 1 80px;
         display: flex;
 
         .action {
