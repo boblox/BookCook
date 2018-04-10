@@ -9,7 +9,7 @@ namespace API.Models
     {
         public int Id { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         public RecipeData Data { get; set; }
 

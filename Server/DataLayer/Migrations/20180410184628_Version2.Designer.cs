@@ -11,9 +11,10 @@ using System;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(CookBookContext))]
-    partial class CookBookContextModelSnapshot : ModelSnapshot
+    [Migration("20180410184628_Version2")]
+    partial class Version2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

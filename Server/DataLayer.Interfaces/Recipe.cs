@@ -7,7 +7,7 @@ namespace DataLayer.Interfaces
     {
         public int Id { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         public bool Deleted { get; set; }
 
