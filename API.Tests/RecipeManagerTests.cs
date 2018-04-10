@@ -190,9 +190,9 @@ namespace API.Tests
                 Assert.AreEqual(recipes.Count, 2);
                 Assert.AreEqual(recipe.Data.Name, "Added recipe");
                 Assert.AreEqual(recipe.Data.Description, "Added recipe description");
-                Assert.AreEqual(recipe.DateCreated.Date, DateTime.Now.Date);
+                Assert.AreEqual(recipe.DateCreated.Date, DateTime.UtcNow.Date);
                 Assert.AreEqual(recipe.Deleted, false);
-                Assert.AreEqual(recipe.Id, 2);
+                Assert.AreEqual(recipe.Id, recipeToAdd.Id);
             });
         }
 
@@ -239,7 +239,7 @@ namespace API.Tests
                 Assert.AreEqual(recipes.Count, 1);
                 Assert.AreEqual(recipe.Data.Name, "Added recipe");
                 Assert.AreEqual(recipe.Data.Description, "Added recipe description");
-                Assert.AreEqual(recipe.DateCreated.Date, DateTime.Now.Date);
+                Assert.AreEqual(recipe.DateCreated.Date, DateTime.UtcNow.Date);
                 Assert.AreEqual(recipe.Deleted, false);
                 Assert.AreEqual(recipe.Id, firstRecipe.Id);
             });
@@ -291,7 +291,7 @@ namespace API.Tests
                 Assert.AreEqual(recipes.Count, 1);
                 Assert.AreEqual(recipe.Data.Name, "New name");
                 Assert.AreEqual(recipe.Data.Description, "New description");
-                Assert.AreEqual(recipe.DateCreated.Date, DateTime.Now.Date);
+                Assert.AreEqual(recipe.DateCreated.Date, DateTime.UtcNow.Date);
                 Assert.AreEqual(recipe.Deleted, false);
                 Assert.AreEqual(recipe.Id, recipeToAdd.Id);
             });

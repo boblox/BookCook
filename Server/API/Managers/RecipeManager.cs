@@ -117,14 +117,14 @@ namespace API.Managers
             //TODO: bad behaviour: code depends on realization!
             var dbRecipe = new IDataLayer.Recipe()
             {
-                DateCreated = DateTime.Now,
+                DateCreated = DateTime.UtcNow,
                 Revisions = new List<IDataLayer.RecipeRevision>
                 {
                     new IDataLayer.RecipeRevision()
                     {
                         Name = recipe.Data.Name,
                         Description = recipe.Data.Description,
-                        StartDate = DateTime.Now,
+                        StartDate = DateTime.UtcNow,
                         EndDate = null,
                         Version = 1,
                     }
@@ -154,12 +154,12 @@ namespace API.Managers
             };
 
             var latestRevision = GetRecipeCurrentRevision(revisions);
-            latestRevision.EndDate = DateTime.Now;
+            latestRevision.EndDate = DateTime.UtcNow;
             var dbRecipeRevision = new IDataLayer.RecipeRevision()
             {
                 Name = recipe.Data.Name,
                 Description = recipe.Data.Description,
-                StartDate = DateTime.Now,
+                StartDate = DateTime.UtcNow,
                 EndDate = null,
                 Version = latestRevision.Version + 1,
                 RecipeId = latestRevision.RecipeId,
