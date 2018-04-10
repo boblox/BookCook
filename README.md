@@ -12,9 +12,8 @@ To start web api service:
 - Build and run API project
 
 For convenience, solution is published to:
-
-Client: http://www.cook-book.boblox.org
-Web API: http://cook-book.api.boblox.org
+- Client: http://www.cook-book.boblox.org
+- Web API: http://cook-book.api.boblox.org
 
 # Project creation
 The idea was to deliver product in time, write it in the most simple but at the same time agile approach. Project creation started from evaluation of minimal user needs and modeling of its use-cases. Then I designed user interface, thinked about common project structure, created Web API facade, worked on domain model, business layer and db model. After that I implemented first version of product and covered it with some unit tests. At that time, when you running product, you can do some reorganization and add an additional functionality.
