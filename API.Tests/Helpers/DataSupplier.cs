@@ -26,14 +26,14 @@ namespace API.Tests.Helpers
             {
                 new IDataLayer.Recipe
                 {
-                    Id = 1,
+                    //Id = 1,
                     DateCreated = new DateTime(2018, 1, 1),
                     Deleted = false,
                     Revisions = new List<IDataLayer.RecipeRevision>
                     {
                         new IDataLayer.RecipeRevision
                         {
-                            Id = 1,
+                            //Id = 1,
                             Name = "First recipe",
                             Description = "First recipe description",
                             StartDate = new DateTime(2018, 1, 1),
@@ -42,7 +42,7 @@ namespace API.Tests.Helpers
                         },
                         new IDataLayer.RecipeRevision
                         {
-                            Id = 2,
+                            //Id = 2,
                             Name = "First recipe. Revision 2",
                             Description = "First recipe description. Revision 2",
                             StartDate = new DateTime(2018, 3, 12),
@@ -53,14 +53,14 @@ namespace API.Tests.Helpers
                 },
                 new IDataLayer.Recipe
                 {
-                    Id = 2,
+                    //Id = 2,
                     DateCreated = new DateTime(2018, 2, 9),
                     Deleted = false,
                     Revisions = new List<IDataLayer.RecipeRevision>
                     {
                         new IDataLayer.RecipeRevision
                         {
-                            Id = 3,
+                            //Id = 3,
                             Name = "Second recipe",
                             Description = "Second recipe",
                             StartDate = new DateTime(2018, 2, 9),
@@ -71,20 +71,49 @@ namespace API.Tests.Helpers
                 },
                 new IDataLayer.Recipe
                 {
-                    Id = 3,
+                    //Id = 3,
                     DateCreated = new DateTime(2018, 3, 20),
                     Deleted = true,
                     Revisions = new List<IDataLayer.RecipeRevision>
                     {
                         new IDataLayer.RecipeRevision
                         {
-                            Id = 4,
+                            //Id = 4,
                             Name = "Third recipe (deleted)",
                             Description = "Thirt recipe (deleted)",
                             StartDate = new DateTime(2018, 3, 20),
                             EndDate = null,
                             Version = 1
                         }
+                    }
+                }
+            };
+        }
+
+        public List<IDomainLayer.Recipe> RecipeManager_GetRecipes()
+        {
+            return new List<IDomainLayer.Recipe>
+            {
+                new IDomainLayer.Recipe
+                {
+                    Id = 1,
+                    DateCreated = new DateTime(2018, 1, 12),
+                    Deleted = false,
+                    Data = new IDomainLayer.RecipeData
+                    {
+                        Name = "Recipe 1",
+                        Description = "Recipe 1 description"
+                    }
+                },
+                new IDomainLayer.Recipe
+                {
+                    Id = 2,
+                    DateCreated = new DateTime(2018, 3, 25),
+                    Deleted = false,
+                    Data = new IDomainLayer.RecipeData
+                    {
+                        Name = "Recipe 2",
+                        Description = "Recipe 2 description"
                     }
                 }
             };

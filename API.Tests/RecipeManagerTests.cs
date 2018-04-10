@@ -3,6 +3,7 @@ using API.Tests.Helpers;
 using DataLayer;
 using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -46,10 +47,22 @@ namespace API.Tests
         public void Setup()
         {
             _logger = Mock.Of<ILogger<RecipeManager>>();
+            _dataSupplier = new DataSupplier();
+            
+            // Create a fresh service provider, and therefore a fresh 
+            // InMemory database instance.
+            var serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .BuildServiceProvider();
+
+            // Create a new options instance telling the context to use an
+            // InMemory database and the new service provider.
+            // We use InternalServiceProvider because of:
+            // https://github.com/aspnet/EntityFrameworkCore/issues/6872
             _options = new DbContextOptionsBuilder<CookBookContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .UseInternalServiceProvider(serviceProvider)
                 .Options;
-            _dataSupplier = new DataSupplier();
         }
 
         //[TestCleanup]
