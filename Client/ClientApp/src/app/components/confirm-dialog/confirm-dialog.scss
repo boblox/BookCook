@@ -75,15 +75,6 @@
 
         .content {
             margin: 35px 20px;
-
-            .form-group {
-                &.description {
-                    textarea {
-                        resize: vertical;
-                        min-height: 150px;
-                    }
-                }
-            }
         }
 
         .buttons {

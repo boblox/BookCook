@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, HostBinding, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, HostBinding, ViewChild, HostListener} from '@angular/core';
 import {RecipesService} from '../../services';
 import {Recipe, RecipeData} from '../../models';
 import {NgForm} from '@angular/forms';
@@ -27,6 +27,16 @@ export class ManageRecipeComponent implements OnInit {
 
     constructor(private recipesService: RecipesService) {
         this.recipe = new Recipe({data: new RecipeData()});
+    }
+
+    @HostListener('document:keydown', ['$event'])
+    onKeyUp(e: any) {
+        if (e.keyCode === 27) {
+            this.onCancel();
+        } else if ([32, 13].indexOf(e.keyCode) >= 0) {
+            e.preventDefault();
+            this.onConfirm();
+        }
     }
 
     ngOnInit() {
@@ -64,9 +74,12 @@ export class ManageRecipeComponent implements OnInit {
         if (this.recipeForm.valid) {
             this.recipesService.saveRecipe(this.recipe)
                 .subscribe(data => {
-                    this.hide();
-                    this.confirm(data);
-                });
+                        this.hide();
+                        this.confirm(data);
+                    },
+                    (error) => {
+                        // TODO: show meaningful error to user!
+                    });
         }
     }
 }

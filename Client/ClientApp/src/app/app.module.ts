@@ -7,6 +7,9 @@ import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {NavMenuComponent} from './components/nav-menu/nav-menu.component';
 import {HomeComponent} from './components/home/home.component';
+import {ManageRecipeComponent} from './components/manage-recipe/manage-recipe.component';
+import {RecipeHistoryComponent} from './components/recipe-history/recipe-history.component';
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 
 import {
     RecipesService,
@@ -16,8 +19,6 @@ import {
     RecipeRevisionMapper,
     RecipeDataMapper
 } from './services';
-import {ManageRecipeComponent} from './components/manage-recipe/manage-recipe.component';
-import {RecipeHistoryComponent} from './components/recipe-history/recipe-history.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {RecipeHistoryComponent} from './components/recipe-history/recipe-history
         HomeComponent,
         ManageRecipeComponent,
         RecipeHistoryComponent,
+        ConfirmDialogComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -34,8 +36,6 @@ import {RecipeHistoryComponent} from './components/recipe-history/recipe-history
         RouterModule.forRoot([
             {path: '', component: HomeComponent, pathMatch: 'full'},
             {path: 'recipe/:id/history', component: RecipeHistoryComponent, pathMatch: 'full'},
-            //{ path: 'counter', component: CounterComponent },
-            //{ path: 'fetch-data', component: FetchDataComponent },
         ])
     ],
     providers: [

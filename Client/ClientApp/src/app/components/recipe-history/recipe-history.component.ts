@@ -11,6 +11,7 @@ import {ManageMode, ManageRecipeComponent} from '../manage-recipe/manage-recipe.
     styleUrls: ['./recipe-history.component.scss']
 })
 export class RecipeHistoryComponent implements OnInit {
+    readonly maxFieldLength = 60;
     public recipeRevisions: RecipeRevision[];
     public recipe: Recipe;
     @ViewChild(ManageRecipeComponent) manageRecipeDialog: ManageRecipeComponent;
@@ -50,5 +51,9 @@ export class RecipeHistoryComponent implements OnInit {
 
     goBack() {
         this.location.back();
+    }
+
+    getShortName(s: string) {
+        return s && s.length > this.maxFieldLength ? s.substring(0, this.maxFieldLength) + '...' : s;
     }
 }

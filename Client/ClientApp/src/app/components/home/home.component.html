@@ -1,11 +1,16 @@
-<app-manage-recipe [cancelText]="'Cancel'" [confirmText]="'Save'"></app-manage-recipe>
+<app-manage-recipe [cancelText]="dialogText.cancel" [confirmText]="dialogText.save"></app-manage-recipe>
+<app-confirm-dialog [cancelText]="dialogText.cancel" [confirmText]="dialogText.confirm"
+    [title]="dialogText.confirmDeleteTitle">
+    <h4>{{dialogText.confirmDeleteBody}}</h4>
+</app-confirm-dialog>
 
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
+        <h4 *ngIf="recipes?.length===0">Start your journey by adding your first recipe!</h4>
         <div class="global-actions">
             <button (click)="addRecipe()" type="button" class="btn btn-success" href="#">Add recipe</button>
         </div>
-        <div class="cook-book">
+        <div class="cook-book" *ngIf="recipes?.length>0">
             <div class="header table-row">
                 <div class="item name">
                     Name
@@ -14,7 +19,7 @@
                     Description
                 </div>
                 <div class="item creation-date">
-                    Creation Date
+                    Date of creation
                 </div>
                 <div class="item actions">
                     Actions
@@ -22,10 +27,10 @@
             </div>
             <div *ngFor="let recipe of recipes" class="recipe table-row">
                 <div class="item name">
-                    {{recipe.data?.name}}
+                    {{getShortName(recipe.data?.name)}}
                 </div>
                 <div class="item description">
-                    {{recipe.data?.description}}
+                    {{getShortName(recipe.data?.description)}}
                 </div>
                 <div class="item creation-date">
                     {{recipe.dateCreated | date: 'medium'}}
@@ -37,7 +42,7 @@
                     <span class="lnr lnr-trash action delete"
                         (click)="deleteRecipe(recipe)" title="Delete">
                     </span>
-                    <span class="lnr lnr-history action delete"
+                    <span class="lnr lnr-history action history"
                         [routerLink]="['/recipe', recipe.id, 'history']" title="View history">
                     </span>
                 </div>

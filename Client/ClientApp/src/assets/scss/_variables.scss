@@ -1,29 +1,22 @@
 //Colors=====================================================
-//$blue-color1: #2c3c4c; //color of nav menu bg
-//$blue-color2: #283543; //color of bg of nav menu active link
-//$blue-color3: #34a5da; //default color of links and color of planned text in Planning table
-//$blue-color4: #1581b3; //default color of hovered links
-//$blue-color5: #e2f6ff; //dropper bg
-//$gray-color1: #ccc; //color of input's borders
-//$gray-color2: #999; //default font color
-//$gray-color3: #666; //color of text in sub groups in Planning table
-//$gray-color4: #ebeef3; //hover bg color of gray buttons
-//$gray-color5: #e1e1e1; //default color of borders
-//$gray-color6: #f4f6f8; //default color of bg
-//$gray-color7: #f9fafb; //color of rows in Planning table and bg of gray buttons
-//$gray-color8: #ededed; //color of aggregator rows of Report table
-//$gray-color9: #c2c7cc; //color of switch-check-box bg
-////$gray-color9: #f3f4f6; //hover bg color of top header buttons and popover items
-//$black-color1: #333; //color of input's text
-//$orange-color1: #f75b36; //alert color
-//$orange-color2: #fff6e4; //bg color of alert
-//$green-color1: #84c612; //color of green button and nav
-//$green-color2: #278a13; //darker green (used in progress bar and green buttons)
-//$green-color3: #f8ffec; //bg of hints
-//$green-color4: #dfeec5; //bg of progress bar in dashboard
-//$green-color5: #999999; //text color
-////$green-color5: #237a0d; //green button hover border
-////$green-color6: #2c8d13; //green button hover bg
+$blue-color1: #0c1163;
+$violet-color1: #8d6391;
+$beige-color1: #f2e7d6;
+$yellow-color1: #ffc72f;
+$orange-color1: #FF8801;
+$green-color1: #5cb85c;
 
-$orange-color1: #f75b36;
-$green-color2: #278a13;
+$transition1: linear .2s;
+
+$grid-breakpoints: (
+    // Extra small screen / phone
+    xs: 0,
+    // Small screen / phone
+    sm: 576px,
+    // Medium screen / tablet
+    md: 768px,
+    // Large screen / desktop
+    lg: 992px,
+    // Extra large screen / wide desktop
+    xl: 1200px
+);

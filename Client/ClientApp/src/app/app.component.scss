@@ -1,7 +1,12 @@
+@import "../assets/scss/variables";
+
 .page-nav-header {
     .title {
-        margin: 40px 0 20px;
+        margin: 40px 0 40px;
         text-align: center;
+        h1 {
+            color: $violet-color1;
+        }
     }
 }
 

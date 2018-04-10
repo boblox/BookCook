@@ -17,14 +17,17 @@
     }
 
     .header {
-        background-color: burlywood;
+        background-color: $yellow-color1;
         font-weight: bold;
+        border-radius: 5px 5px 0 0;
+        min-height: 60px;
     }
 
     .recipe {
         display: flex;
-        background-color: blanchedalmond;
-        margin: 0 0 20px 0;
+        background-color: $beige-color1;
+        margin: 0 0 10px 0;
+        border-radius: 5px;
 
         * {
             overflow: hidden;
@@ -52,14 +55,24 @@
             text-decoration: none;
             cursor: pointer;
             margin: 0 12px 0 0;
-            font-size: 18px;
+            font-size: 20px;
+            transition: $transition1;
+
+            &:hover, &:active {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
 
             &.edit {
-                color: $orange-color1;
+                color: $violet-color1;
             }
 
             &.delete {
-                color: $green-color2;
+                color: $orange-color1;
+            }
+
+            &.history {
+                color: $green-color1;
             }
         }
     }

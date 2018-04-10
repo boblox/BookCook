@@ -26,10 +26,10 @@
             </div>
             <div *ngFor="let revision of recipeRevisions" class="recipe table-row">
                 <div class="item name">
-                    {{revision.data?.name}}
+                    {{getShortName(revision.data?.name)}}
                 </div>
                 <div class="item description">
-                    {{revision.data?.description}}
+                    {{getShortName(revision.data?.description)}}
                 </div>
                 <div class="item edit-date">
                     {{revision.startDate | date: 'medium'}}

@@ -17,13 +17,13 @@
     }
 
     .header {
-        background-color: burlywood;
+        background-color: $yellow-color1;
         font-weight: bold;
     }
 
     .recipe {
         display: flex;
-        background-color: blanchedalmond;
+        background-color: $beige-color1;
         margin: 0 0 20px 0;
 
         * {
@@ -56,10 +56,16 @@
             text-decoration: none;
             cursor: pointer;
             margin: 0 12px 0 0;
-            font-size: 18px;
+            font-size: 20px;
+            transition: $transition1;
+
+            &:hover, &:active {
+                opacity: 0.6;
+                transform: scale(1.2);
+            }
 
             &.view {
-                color: $green-color2;
+                color: $green-color1;
             }
         }
     }
