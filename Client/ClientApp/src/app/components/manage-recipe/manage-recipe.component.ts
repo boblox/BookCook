@@ -33,7 +33,7 @@ export class ManageRecipeComponent implements OnInit {
     onKeyUp(e: any) {
         if (e.keyCode === 27) {
             this.onCancel();
-        } else if ([32, 13].indexOf(e.keyCode) >= 0) {
+        } else if ([13].indexOf(e.keyCode) >= 0) {
             e.preventDefault();
             this.onConfirm();
         }
